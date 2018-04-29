@@ -35,12 +35,13 @@ clock.ontick = (evt) => {
   let timeString = `${hours}:${mins}`;
   labelTime.text = timeString;
   labelTimeShadow.text = timeString;
-
   if (mySettings.lastDownload) {
-    let hoursSinceDownload = Math.abs(today - mySettings.lastDownload) / (60 * 60 * 1000);
+    let hoursSinceDownload = Math.abs(today - new Date(mySettings.lastDownload)) / (60 * 60 * 1000);
     if (hoursSinceDownload >= 1) {
       requestNewBackground();
     }
+  } else {
+      requestNewBackground();
   }
 }
 
@@ -57,26 +58,20 @@ inbox.onnewfile = () => {
   let fileName;
   do {
     fileName = inbox.nextFile();
-    let outFileName = fileName + ".txi";
     if (fileName) {
       if (mySettings.bg && mySettings.bg !== "") {
         fs.unlinkSync(mySettings.bg);
       }
+      let outFileName = fileName + ".txi";
       jpeg.decodeSync(fileName, outFileName, {
         delete: true,
         overwrite: true
       });
       mySettings.bg = `/private/data/${outFileName}`;
-      mySettings.lastDownload = new Date();
+      mySettings.lastDownload = new Date().valueOf();
       applySettings();
     }
   } while (fileName);
-}
-
-messaging.peerSocket.onopen = () => {
-  if (!mySettings.bg) {
-    requestNewBackground();
-  }
 }
 
 function loadSettings() {
