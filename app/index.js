@@ -63,10 +63,8 @@ inbox.onnewfile = () => {
         fs.unlinkSync(mySettings.bg);
       }
       let outFileName = fileName + ".txi";
-      jpeg.decodeSync(fileName, outFileName, {
-        delete: true,
-        overwrite: true
-      });
+      jpeg.decodeSync(fileName, outFileName);
+      fs.unlinkSync(fileName);
       mySettings.bg = `/private/data/${outFileName}`;
       mySettings.lastDownload = new Date().valueOf();
       applySettings();
