@@ -1,7 +1,7 @@
 {
   "fitbit": {
     "appType": "clockface",
-    "appDisplayName": "sdk-image-api",
+    "appDisplayName": "sdk-image-clock",
     "iconFile": "resources/icon.png",
     "wipeColor": "",
     "requestedPermissions": [
@@ -14,7 +14,7 @@
     ],
     "i18n": {
       "en": {
-        "name": "sdk-image-api"
+        "name": "sdk-image-clock"
       }
     }
   }

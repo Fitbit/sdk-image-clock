@@ -1,4 +1,4 @@
-# SDK Image API
+# SDK Image Clock
 
 Fitbit SDK example clock face which downloads a random image from
 [Unsplash](https://unsplash.com/) approximately every hour.
